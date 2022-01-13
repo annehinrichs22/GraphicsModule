@@ -31,7 +31,7 @@ begin
     playerx <= unsigned(player_x);
     playery <= unsigned(player_y);
 
-    process(player_angle, playerx, playery, x, y)
+    process(orientations, playerx, playery, x, y)
 
         variable loxroy : signed(7 downto 0);
         variable roxloy : signed(7 downto 0);
@@ -66,10 +66,10 @@ begin
             -- Translate y-value to be able to use yvar from 0 -> 128
             yvar := y - 128;
             -- Remap the player angle from -180 -> 180 to 0 -> 360
-            if (signed(player_angle) < 0) then
-                playerangle := unsigned(signed(player_angle) + 360);
+            if (signed(orientations) < 0) then
+                playerangle := unsigned(signed(orientations) + 360);
             else
-                playerangle := unsigned(player_angle);
+                playerangle := unsigned(orientations);
             end if;
             -- Add half the fov-angle (90 degrees) to the playerangle
             angle := playerangle + 45;
